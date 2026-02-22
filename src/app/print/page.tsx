@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 
-const subjects = [
+const printSubjects = [
   {
-    href: "/kokugo",
+    href: "/kokugo?mode=print",
     emoji: "📖",
     title: "こくご",
     subtitle: "かんじドリル",
-    description: "小1のかんじ80字をれんしゅう！",
+    description: "かんじのよみ・かきをいんさつ！",
     gradient: "from-sky-400 to-indigo-500",
     bgLight: "from-sky-50 to-indigo-50",
     borderColor: "border-sky-200",
@@ -16,11 +16,11 @@ const subjects = [
     textColor: "text-sky-700",
   },
   {
-    href: "/sansuu",
+    href: "/sansuu?mode=print",
     emoji: "🔢",
     title: "さんすう",
     subtitle: "たしざん＆ひきざん",
-    description: "小1のけいさんをランダムにれんしゅう！",
+    description: "けいさんもんだいをいんさつ！",
     gradient: "from-orange-400 to-pink-500",
     bgLight: "from-orange-50 to-pink-50",
     borderColor: "border-orange-200",
@@ -28,11 +28,11 @@ const subjects = [
     textColor: "text-orange-700",
   },
   {
-    href: "/clock",
+    href: "/clock?mode=print",
     emoji: "🕐",
     title: "とけい",
     subtitle: "とけいドリル",
-    description: "なんじなんぷん？じかんのけいさんをれんしゅう！",
+    description: "とけいのもんだいをいんさつ！",
     gradient: "from-amber-400 to-yellow-400",
     bgLight: "from-amber-50 to-yellow-50",
     borderColor: "border-amber-200",
@@ -41,20 +41,28 @@ const subjects = [
   },
 ];
 
-export default function HomePage() {
+export default function PrintSelectPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-orange-50 to-pink-50 flex flex-col items-center justify-center p-4">
       <div className="max-w-lg w-full text-center">
-        <div className="mb-10">
-          <div className="text-6xl mb-4 animate-float">🎒</div>
+        <div className="mb-8">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1 text-orange-500 hover:text-orange-600 font-bold text-sm mb-4 transition-all"
+          >
+            ← トップへもどる
+          </Link>
+          <div className="text-6xl mb-4 animate-float">🖨️</div>
           <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-500 mb-2">
-            小1ドリル
+            プリント
           </h1>
-          <p className="text-orange-400 text-lg">きょうかをえらんでね！</p>
+          <p className="text-orange-400 text-lg">
+            きょうかをえらんでいんさつしよう！
+          </p>
         </div>
 
         <div className="space-y-4">
-          {subjects.map((subject) => (
+          {printSubjects.map((subject) => (
             <Link
               key={subject.href}
               href={subject.href}
@@ -72,7 +80,9 @@ export default function HomePage() {
                 </div>
                 <span className="ml-auto text-white text-2xl">→</span>
               </div>
-              <div className={`bg-gradient-to-br ${subject.bgLight} px-6 py-4`}>
+              <div
+                className={`bg-gradient-to-br ${subject.bgLight} px-6 py-4`}
+              >
                 <p className={`${subject.textColor} font-bold`}>
                   {subject.description}
                 </p>
@@ -81,22 +91,8 @@ export default function HomePage() {
           ))}
         </div>
 
-        <Link
-          href="/print"
-          className="mt-8 block bg-white/60 rounded-2xl p-5 hover:bg-white/80 transform hover:scale-[1.02] active:scale-95 transition-all"
-        >
-          <div className="flex items-center justify-center gap-3">
-            <span className="text-3xl">🖨️</span>
-            <div className="text-left">
-              <h2 className="text-lg font-bold text-orange-500">プリント</h2>
-              <p className="text-orange-400 text-sm">いんさつしてかみでれんしゅう！</p>
-            </div>
-            <span className="ml-auto text-orange-400 text-xl">→</span>
-          </div>
-        </Link>
-
         <p className="mt-8 text-orange-300 text-sm">
-          がんばってれんしゅうしよう！ 💪
+          かみにいんさつしてれんしゅうしよう！ ✏️
         </p>
       </div>
     </div>

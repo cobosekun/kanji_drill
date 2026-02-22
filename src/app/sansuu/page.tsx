@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { generateMathQuestions, generateSingleQuestion } from "@/data/math-questions";
 import { MathQuestion } from "@/types/math-question";
 
@@ -498,7 +499,9 @@ function PrintPage({ onBack }: PrintPageProps) {
 type PageType = "home" | "quiz" | "list" | "print";
 
 export default function MathDrillApp() {
-  const [page, setPage] = useState<PageType>("home");
+  const searchParams = useSearchParams();
+  const initialPage = searchParams.get("mode") === "print" ? "print" : "home";
+  const [page, setPage] = useState<PageType>(initialPage);
   const [currentQuestion, setCurrentQuestion] = useState<MathQuestion | null>(null);
   const [questionIdCounter, setQuestionIdCounter] = useState(1);
   const [sessionTotal, setSessionTotal] = useState(0);

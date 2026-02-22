@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { kanjiQuestions } from "@/data/kanji-questions";
 import { KanjiQuestion, QuestionProgress, QUESTIONS_PER_SESSION } from "@/types/question";
 
@@ -593,7 +594,9 @@ function PrintPage({ onBack }: PrintPageProps) {
 type Page = "home" | "quiz" | "list" | "print";
 
 export default function KanjiDrillApp() {
-  const [page, setPage] = useState<Page>("home");
+  const searchParams = useSearchParams();
+  const initialPage = searchParams.get("mode") === "print" ? "print" : "home";
+  const [page, setPage] = useState<Page>(initialPage);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [progress, setProgress] = useState<QuestionProgress[]>(initProgress);
   const [sessionCorrectCount, setSessionCorrectCount] = useState(0);
