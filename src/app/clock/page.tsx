@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ClockQuestion, CLOCK_QUESTIONS_PER_SESSION } from "@/types/clock-question";
@@ -799,6 +799,14 @@ function PrintPage({ onBack }: { onBack: () => void }) {
 type Page = "home" | "quiz" | "print";
 
 export default function ClockDrillPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-sky-100 flex items-center justify-center"><p className="text-amber-600 font-bold text-lg">よみこみちゅう...</p></div>}>
+      <ClockDrillContent />
+    </Suspense>
+  );
+}
+
+function ClockDrillContent() {
   const searchParams = useSearchParams();
   const initialPage = searchParams.get("mode") === "print" ? "print" : "home";
   const [page, setPage] = useState<Page>(initialPage);

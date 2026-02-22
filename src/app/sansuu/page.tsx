@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { generateMathQuestions, generateSingleQuestion } from "@/data/math-questions";
@@ -499,6 +499,14 @@ function PrintPage({ onBack }: PrintPageProps) {
 type PageType = "home" | "quiz" | "list" | "print";
 
 export default function MathDrillApp() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-orange-100 via-orange-50 to-pink-100 flex items-center justify-center"><p className="text-orange-600 font-bold text-lg">よみこみちゅう...</p></div>}>
+      <MathDrillContent />
+    </Suspense>
+  );
+}
+
+function MathDrillContent() {
   const searchParams = useSearchParams();
   const initialPage = searchParams.get("mode") === "print" ? "print" : "home";
   const [page, setPage] = useState<PageType>(initialPage);

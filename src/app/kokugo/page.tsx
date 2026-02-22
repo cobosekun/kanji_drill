@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { kanjiQuestions } from "@/data/kanji-questions";
@@ -594,6 +594,14 @@ function PrintPage({ onBack }: PrintPageProps) {
 type Page = "home" | "quiz" | "list" | "print";
 
 export default function KanjiDrillApp() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-sky-100 via-sky-50 to-violet-100 flex items-center justify-center"><p className="text-sky-600 font-bold text-lg">よみこみちゅう...</p></div>}>
+      <KanjiDrillContent />
+    </Suspense>
+  );
+}
+
+function KanjiDrillContent() {
   const searchParams = useSearchParams();
   const initialPage = searchParams.get("mode") === "print" ? "print" : "home";
   const [page, setPage] = useState<Page>(initialPage);
