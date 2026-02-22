@@ -703,7 +703,7 @@ export default function KanjiDrillApp() {
             <span className="flex items-center justify-center gap-3">🚀 はじめる</span>
           </button>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 mb-3">
             <button type="button" onClick={() => setPage("list")} aria-label="いちらん" className="py-3 px-4 bg-sky-100 text-sky-700 text-lg font-bold rounded-xl hover:bg-sky-200 transform hover:scale-[1.02] active:scale-95 transition-all">
               📋 いちらん
             </button>
@@ -711,6 +711,14 @@ export default function KanjiDrillApp() {
               🖨️ いんさつ
             </button>
           </div>
+
+          <a
+            href="/clock"
+            aria-label="とけいドリル"
+            className="block w-full py-4 px-6 bg-gradient-to-r from-amber-400 to-yellow-300 text-white text-xl font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-95 transition-all text-center"
+          >
+            🕐 とけいドリルもやってみよう！
+          </a>
         </div>
       </div>
     );
