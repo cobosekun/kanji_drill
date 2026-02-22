@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  --font-rounded: "M PLUS Rounded 1c", sans-serif;
+  --font-mincho: "Noto Serif JP", serif;
+}
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+}
+
+body {
+  font-family: var(--font-rounded);
+}
+
+/* ── Animations ── */
+@keyframes bounce-in {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-bounce-in { animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+.animate-shake { animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+.animate-sparkle { animation: sparkle 1.5s ease-in-out infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+/* ── Print ── */
+.print-only { display: none; }
+
+@media print {
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+
+  body {
+    background: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  .print-page {
+    page-break-after: always;
+    page-break-inside: avoid;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .print-page:last-child {
+    page-break-after: auto;
+  }
+
+  .print-questions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .print-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .print-card > div {
+    width: 100%;
+  }
+}
